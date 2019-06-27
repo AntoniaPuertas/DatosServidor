@@ -7,11 +7,11 @@ import java.util.ArrayList;
 
 public class RespuestaServidor {
     private int estado;
-    private Mensaje mensaje;
+    private ArrayList<Villano> mensaje;
 
-    public RespuestaServidor(int estado, Mensaje mensaje){
+    public RespuestaServidor(int estado, ArrayList<Villano> listaVillanos){
         this.estado = estado;
-        this.mensaje = mensaje;
+        this.mensaje = listaVillanos;
     }
 
     public int getEstado() {
@@ -22,23 +22,11 @@ public class RespuestaServidor {
         this.estado = estado;
     }
 
-    public Mensaje getMensaje() {
+    public ArrayList<Villano> getListaVillanos() {
         return mensaje;
     }
 
-    public void setMensaje(Mensaje mensaje) {
-        this.mensaje = mensaje;
-    }
-
-    public class Mensaje implements Serializable{
-        private ArrayList<Villano> villanos;
-
-        public ArrayList<Villano> getVillanos() {
-            return villanos;
-        }
-
-        public void setVillanos(ArrayList<Villano> villanos) {
-            this.villanos = villanos;
-        }
+    public void setListaVillanos(ArrayList<Villano> listaVillanos) {
+        this.mensaje = listaVillanos;
     }
 }

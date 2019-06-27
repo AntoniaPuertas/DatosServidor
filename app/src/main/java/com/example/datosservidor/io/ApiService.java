@@ -9,7 +9,6 @@ import retrofit2.http.Header;
 
 public interface ApiService {
 
-    @GET("prueba_servidor.php")
-    @FormUrlEncoded
+    @GET("datosServidor")
     Call<RespuestaServidor> getDatos(@Header("Auto") String claveApi);
 }

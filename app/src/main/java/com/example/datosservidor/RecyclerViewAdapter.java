@@ -33,9 +33,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(final ViewHolderVillanos holder, final int position) {
-        listaHolderVillanos.add(holder);
 
-        holder.imgVillano.setImageResource(R.drawable.ic_launcher_background);
+        holder.imgVillano.setImageResource(R.drawable.ic_mood_bad_black_24dp);
         holder.txtNombreVillano.setText(listaVillanos.get(position).getNombre());
         holder.txtPelicula.setText(listaVillanos.get(position).getPelicula());
         holder.txtPoderes.setText(listaVillanos.get(position).getPoderes());
@@ -45,6 +44,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public int getItemCount() {
         return listaVillanos.size();
     }
+
+
 
     static class ViewHolderVillanos extends RecyclerView.ViewHolder {
 

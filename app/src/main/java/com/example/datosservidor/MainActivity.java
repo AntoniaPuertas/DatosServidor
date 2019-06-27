@@ -1,7 +1,9 @@
 package com.example.datosservidor;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
@@ -17,16 +19,22 @@ import retrofit2.Retrofit;
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView rvListaVillanos;
-
+    RecyclerViewAdapter recyclerViewAdapter;
+    Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         rvListaVillanos = findViewById(R.id.rvListaVillanos);
+        context = getApplicationContext();
+        //mostrarListView(context);
+
+        getDatos(context);
+
     }
 
-    private void getDatos(){
+    private void getDatos(final Context context){
 
 
         Retrofit retrofit = new MyApiAdapter().getDatosServidor();
@@ -42,10 +50,13 @@ public class MainActivity extends AppCompatActivity {
                 }else{
                     int estado = response.body().getEstado();
                     if(estado == 0) {
-                        Datos.setListaVillanos(response.body().getMensaje().getVillanos());
+                        Datos.setListaVillanos(response.body().getListaVillanos());
+                        //recyclerViewAdapter.notifyDataSetChanged();
+                        mostrarListView(context);
 
                     }else{
                         //error en la respuesta
+                        Toast.makeText(MainActivity.this,"El servidor no responde", Toast.LENGTH_LONG).show();
                     }
                 }
             }
@@ -57,5 +68,15 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void mostrarListView(Context context){
+        rvListaVillanos.setHasFixedSize(true);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        rvListaVillanos.setLayoutManager(llm);
+        //Datos.getListaVillanos().add(new Villano("nombre", "pelicula", "poderes"));
+        recyclerViewAdapter = new RecyclerViewAdapter(context, Datos.getListaVillanos());
+        rvListaVillanos.setAdapter(recyclerViewAdapter);
     }
 }
