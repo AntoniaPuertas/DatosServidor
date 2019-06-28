@@ -15,12 +15,10 @@ import java.util.ArrayList;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolderVillanos> {
 
     private ArrayList<Villano> listaVillanos;
-    private Context context;
-    private ArrayList<ViewHolderVillanos> listaHolderVillanos = null;
 
-    public RecyclerViewAdapter(Context context, ArrayList<Villano> listaVillanos) {
+
+    public RecyclerViewAdapter(ArrayList<Villano> listaVillanos) {
         this.listaVillanos = listaVillanos;
-        this.context = context;
     }
 
 

@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
 
         rvListaVillanos = findViewById(R.id.rvListaVillanos);
         context = getApplicationContext();
-        //mostrarListView(context);
 
         getDatos(context);
 
@@ -51,9 +50,7 @@ public class MainActivity extends AppCompatActivity {
                     int estado = response.body().getEstado();
                     if(estado == 0) {
                         Datos.setListaVillanos(response.body().getListaVillanos());
-                        //recyclerViewAdapter.notifyDataSetChanged();
                         mostrarListView(context);
-
                     }else{
                         //error en la respuesta
                         Toast.makeText(MainActivity.this,"El servidor no responde", Toast.LENGTH_LONG).show();
@@ -71,12 +68,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void mostrarListView(Context context){
-        rvListaVillanos.setHasFixedSize(true);
+
         LinearLayoutManager llm = new LinearLayoutManager(this);
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
         rvListaVillanos.setLayoutManager(llm);
-        //Datos.getListaVillanos().add(new Villano("nombre", "pelicula", "poderes"));
-        recyclerViewAdapter = new RecyclerViewAdapter(context, Datos.getListaVillanos());
+        recyclerViewAdapter = new RecyclerViewAdapter(Datos.getListaVillanos());
         rvListaVillanos.setAdapter(recyclerViewAdapter);
     }
 }
